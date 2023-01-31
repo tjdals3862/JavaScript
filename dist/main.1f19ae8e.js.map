@@ -1,0 +1,1 @@
+{"version":3,"sources":["main.js"],"names":["console","log"],"mappings":"AAAAA,OAAO,CAACC,GAAG,CAAC,CAAC,GAAG,CAAC,CAAC","file":"main.1f19ae8e.js","sourceRoot":"..","sourcesContent":["console.log(1 + 1);\r\n"]}
