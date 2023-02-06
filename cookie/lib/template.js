@@ -4,7 +4,7 @@ module.exports = {
     list,
     body,
     control,
-    authStatusUI = '<a href="/auth/login">login</a>'
+    authStatusUI = '<a href="/login">login</a>'
   ) {
     return `
     <!doctype html>
@@ -27,8 +27,7 @@ module.exports = {
     var list = "<ul>";
     var i = 0;
     while (i < filelist.length) {
-      list =
-        list + `<li><a href="/topic/${filelist[i]}">${filelist[i]}</a></li>`;
+      list = list + `<li><a href="/?id=${filelist[i]}">${filelist[i]}</a></li>`;
       i = i + 1;
     }
     list = list + "</ul>";
