@@ -3,13 +3,12 @@ const app = express();
 const fs = require("fs");
 const bodyParser = require("body-parser");
 const compression = require("compression");
-const topicRouter = require("./routes/topic");
-const indexRouter = require("./routes/index");
-const authRouter = require("./routes/auth");
+
 const helmet = require("helmet");
 app.use(helmet());
 const session = require("express-session");
 const FileStore = require("session-file-store")(session);
+const flash = require("connect-flash");
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extends: false }));
@@ -22,6 +21,18 @@ app.use(
     store: new FileStore(),
   })
 );
+app.use(flash());
+app.get("/flash", function (req, res) {
+  req.flash("msg", "Flash is back!!");
+  res.send("flash");
+});
+
+app.get("/flash-display", function (req, res) {
+  const fmsg = req.flash();
+  res.send(fmsg);
+});
+
+let passport = require("./lib/passport.js")(app);
 
 app.get("*", function (request, response, next) {
   fs.readdir("./data", function (error, filelist) {
@@ -29,6 +40,10 @@ app.get("*", function (request, response, next) {
     next();
   });
 });
+
+const topicRouter = require("./routes/topic");
+const indexRouter = require("./routes/index");
+const authRouter = require("./routes/auth")(passport);
 
 app.use("/", indexRouter);
 app.use("/topic", topicRouter);

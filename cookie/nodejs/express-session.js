@@ -1,9 +1,9 @@
-var express = require("express");
+const express = require("express");
 //var parseurl = require("parseurl");
-var session = require("express-session");
-var FileStore = require("session-file-store")(session);
+const session = require("express-session");
+const FileStore = require("session-file-store")(session);
 
-var app = express();
+const app = express();
 
 app.use(
   session({
